@@ -85,12 +85,9 @@ export default function AboutPage() {
           <h1 className="m-0 font-mono text-[clamp(38px,6vw,60px)] font-normal leading-[1.08]">
             Hi, I&apos;m <span className="about-name">{site.authorFirst}</span>
           </h1>
-          <p className="m-0 max-w-[600px] text-[18px] text-body">
-            I am drawn to the quiet magic of writing, whether I am building worlds from scratch or observing the ones right in front of me. Through fiction, poetry and prose, I love exploring the nuances of people, places and fleeting moments.
-          </p>
-          <p className="m-0 max-w-[600px] text-[18px] text-body">
-            For me, storytelling is both an act of imagination and a way of holding on to real life, beautifully. <em>{book.title}</em> is just the beginning.
-          </p>
+          {site.bio.map((p) => (
+            <p key={p.slice(0, 24)} className="m-0 max-w-[600px] text-[17px] text-body sm:text-[18px]">{p}</p>
+          ))}
           <div className="mt-1"><ProfileLinks long /></div>
         </div>
       </section>
@@ -111,18 +108,25 @@ export default function AboutPage() {
       </section>
 
       {/* Index cards */}
-      <section className="container-cpb py-16 sm:py-24" aria-labelledby="about-more">
+      <section className="container-cpb py-12 sm:py-24" aria-labelledby="about-more">
         <p className="eyebrow mb-2">a little more</p>
-        <h2 id="about-more" className="h-section mb-10 sm:mb-14">Three things to know</h2>
-        <div className="grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
-          {CARDS.map((c) => (
-            <article key={c.title} className="about-card" style={{ "--tilt": `${c.tilt}deg`, "--tape": c.tape } as CSSProperties}>
-              <span className="about-card-tape" aria-hidden="true" />
-              <h3 className="m-0 font-mono text-[24px] font-normal text-ink">{c.title}</h3>
-              <p className="m-0 text-body">{c.body}</p>
-              {c.link && <Link href={c.link.href} className="link-arrow mt-auto">{c.link.label} →</Link>}
-            </article>
-          ))}
+        <h2 id="about-more" className="h-section mb-6 sm:mb-14">Three things to know</h2>
+        <div className="about-line">
+          <div className="about-line-track">
+            {/* The rope the three cards hang from: it dips at the middle of each card, under its tape */}
+            <svg className="about-rope" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <path className="about-rope-core" d="M0 6 Q 25 34 50 34 T 100 6 Q 125 34 150 34 T 200 6 Q 225 34 250 34 T 300 6" />
+              <path className="about-rope-twist" d="M0 6 Q 25 34 50 34 T 100 6 Q 125 34 150 34 T 200 6 Q 225 34 250 34 T 300 6" />
+            </svg>
+            {CARDS.map((c) => (
+              <article key={c.title} className="about-card" style={{ "--tilt": `${c.tilt}deg`, "--tape": c.tape } as CSSProperties}>
+                <span className="about-card-tape" aria-hidden="true" />
+                <h3 className="m-0 font-mono text-[24px] font-normal text-ink">{c.title}</h3>
+                <p className="m-0 text-body">{c.body}</p>
+                {c.link && <Link href={c.link.href} className="link-arrow mt-auto">{c.link.label} →</Link>}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -154,9 +158,9 @@ export default function AboutPage() {
         <div className="about-postcard">
           <div className="min-w-0 flex-[1_1_320px]">
             <p className="eyebrow mb-2">write back</p>
-            <h2 className="m-0 font-mono text-[clamp(26px,3.4vw,34px)] font-normal">Writing work, readings, a chat about a poem?</h2>
-            <p className="mt-3 mb-0 text-body">I&apos;m always glad to hear from readers and editors. Leave a note like a bookmark, and I&apos;ll write back.</p>
-            <Link href="/contact" className="btn btn-primary mt-6">Leave a note</Link>
+            <h2 className="m-0 font-mono text-[clamp(26px,3.4vw,34px)] font-normal">Did a story linger with you, or a poem catch your eye?</h2>
+            <p className="mt-3 mb-0 text-body">I&apos;m always happy to connect with readers, editors and curious minds.</p>
+            <Link href="/contact" className="btn btn-primary mt-6">Reach out</Link>
           </div>
           <div className="about-stamp" aria-hidden="true">
             <Petal size={40} fill="var(--paper)" />

@@ -463,3 +463,24 @@ test.describe("writing desk (production, signed out)", () => {
     await expect(page.getByText("That Google account can't open this desk")).toContainText("Only Vandana's account can sign in");
   });
 });
+
+test("home bio: full on desktop; Show more / See less only on phones", async ({ page }) => {
+  await presetConsent(page);
+  await page.goto("/");
+  const para = page.locator("#about .bio-text");
+  await para.scrollIntoViewIfNeeded();
+  await expect(page.getByRole("button", { name: "Show more" })).toBeHidden();
+  const full = await para.evaluate((el) => el.getBoundingClientRect().height);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  const toggle = page.getByRole("button", { name: "Show more" });
+  await toggle.scrollIntoViewIfNeeded();
+  await expect(toggle).toBeVisible();
+  const clipped = await para.evaluate((el) => el.scrollHeight > el.clientHeight + 2);
+  expect(clipped).toBe(true);
+  await toggle.click();
+  expect(await para.evaluate((el) => el.scrollHeight <= el.clientHeight + 2)).toBe(true);
+  await page.getByRole("button", { name: "See less" }).click();
+  await expect(page.getByRole("button", { name: "Show more" })).toBeVisible();
+  expect(full).toBeGreaterThan(0);
+});

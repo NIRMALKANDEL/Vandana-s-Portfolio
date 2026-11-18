@@ -23,7 +23,7 @@ type Props = { counts: Record<string, number>; picks: Record<string, ShelfPick>;
 /**
  * The bookshelf. Five books: hover (or focus) pulls one forward with a short description;
  * clicking takes it off the shelf and opens it into a reading view with the newest piece on that shelf.
- * Closing puts it back. On phones the shelf becomes a full-width row of covers you can swipe.
+ * Closing puts it back. On phones it is the same shelf, scaled down.
  */
 export default function Shelf({ counts, picks, headingLevel = 2 }: Props) {
   const H = headingLevel === 1 ? "h1" : "h2";
@@ -96,7 +96,7 @@ export default function Shelf({ counts, picks, headingLevel = 2 }: Props) {
           <H className="shelfx-h">Everything I write, on one shelf</H>
           <p className="m-0 max-w-[560px] text-body">
             <span className="hidden sm:inline">Hover over a book to peek. Click to take it down and read.</span>
-            <span className="sm:hidden">Swipe through the shelf. Tap a book to read.</span>
+            <span className="sm:hidden">Tap a book to take it down and read.</span>
           </p>
         </div>
         <button
@@ -170,7 +170,6 @@ export default function Shelf({ counts, picks, headingLevel = 2 }: Props) {
           )}
         </div>
       </div>
-      <p className="shelfx-hint sm:hidden" aria-hidden="true">swipe →</p>
 
       {reading && (
         <Reader

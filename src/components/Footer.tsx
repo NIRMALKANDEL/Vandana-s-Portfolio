@@ -9,8 +9,8 @@ import { site } from "@/lib/site";
 const EXPLORE: [string, string][] = [
   ["/shelf", "The shelf"],
   ["/journal", "Journal"],
-  ["/book", "Things I Told the Sky"],
-  ["/about", "About Vandana"],
+  ["/book", "The book"],
+  ["/about", "About"],
   ["/contact", "Contact"],
 ];
 
@@ -33,17 +33,17 @@ export default function Footer() {
 
       <div className="container-cpb site-footer-grid">
         <div className="site-footer-brand">
-          <FooterSprig />
-          <p className="m-0 font-mono text-[22px] text-ink">{site.name}</p>
+          <span className="site-footer-sprig" aria-hidden="true"><FooterSprig /></span>
+          <p className="site-footer-name">{site.name}</p>
           <p className="site-footer-tagline">{site.tagline}</p>
         </div>
 
-        <nav aria-label="Footer" className="site-footer-col">
+        <nav aria-label="Footer" className="site-footer-col site-footer-explore">
           <p className="site-footer-label">Explore</p>
           <ul className="m-0 list-none p-0">
             {EXPLORE.map(([h, l]) => (
               <li key={h}>
-                <Link href={h} className="nl inline-flex min-h-[44px] items-center">{l}</Link>
+                <Link href={h} className="nl inline-flex min-h-[36px] items-center">{l}</Link>
               </li>
             ))}
           </ul>
@@ -52,17 +52,17 @@ export default function Footer() {
         <div className="site-footer-col">
           <p className="site-footer-label">Follow along</p>
           <ProfileLinks withRss />
-          <button type="button" onClick={toTop} className="site-footer-top">
-            Back to the top
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
-          </button>
         </div>
       </div>
 
       <div className="container-cpb site-footer-base">
-        <p className="m-0">© {new Date().getFullYear()} {site.author} · {site.name}</p>
+        <p className="m-0">© {new Date().getFullYear()} {site.author}</p>
         <button type="button" onClick={openConsentPreferences} className="nl inline-flex min-h-[44px] cursor-pointer items-center border-0 bg-transparent p-0 text-[14px] text-muted">
           Cookie preferences
+        </button>
+        <button type="button" onClick={toTop} className="site-footer-top" aria-label="Back to the top">
+          <span className="hidden sm:inline">Back to the top</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" /></svg>
         </button>
       </div>
     </footer>

@@ -29,22 +29,24 @@ export function LinkIcon({ kind }: { kind: "Substack" | "LinkedIn" | "RSS" | str
 const LABEL: Record<string, string> = { Substack: "Read on Substack", LinkedIn: "Connect on LinkedIn" };
 
 /** Her profiles as soft pill buttons (contact section and footer). */
-export default function ProfileLinks({ withRss = false, long = false }: { withRss?: boolean; long?: boolean }) {
+/** `iconOnMobile`: below 640px only the round icons show (the label stays for screen readers). */
+export default function ProfileLinks({ withRss = false, long = false, iconOnMobile = true }: { withRss?: boolean; long?: boolean; iconOnMobile?: boolean }) {
   const links = [
     ...site.profiles.map((p) => ({ ...p, external: true })),
     ...(withRss ? [{ label: "RSS", href: "/feed.xml", external: false }] : []),
   ];
   return (
-    <ul className="m-0 flex list-none flex-wrap gap-2.5 p-0">
+    <ul className={`profile-links m-0 flex list-none flex-wrap gap-2.5 p-0 ${iconOnMobile ? "is-iconic" : ""}`}>
       {links.map((p) => (
         <li key={p.href}>
           <a
             href={p.href}
             {...(p.external ? { target: "_blank", rel: "noopener noreferrer me" } : {})}
             className="pill-link"
+            title={long ? LABEL[p.label] || p.label : p.label}
           >
             <LinkIcon kind={p.label} />
-            {long ? LABEL[p.label] || p.label : p.label}
+            <span className="pill-text">{long ? LABEL[p.label] || p.label : p.label}</span>
             {p.external && <span className="sr-only"> (opens in a new tab)</span>}
           </a>
         </li>

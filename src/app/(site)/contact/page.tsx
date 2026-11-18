@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <div className="container-cpb pt-2 pb-8 sm:pt-6">
+      <div className="container-cpb pt-2 pb-3 sm:pt-6 sm:pb-6">
         <Breadcrumbs items={[{ href: "/contact", label: "Contact" }]} />
       </div>
       <ContactSection headingLevel={1} source="contact-page" />

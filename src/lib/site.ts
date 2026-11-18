@@ -7,6 +7,12 @@ export const DOMAIN = "thecommonplacebook.in";
 export const site = {
   name: "The Commonplace Book",
   tagline: "Writing is how we teach a fleeting moment to stay.",
+  /** Her own words, used on the homepage (first paragraph, then "Show more") and on /about. */
+  bio: [
+    "I write poetry and fiction with a simple goal: to capture life as it is, and to imagine it as it could be. I believe in the power of language to turn ordinary observations into something memorable and resonant.",
+    "I am currently a second-year student of Food Science, with Psychology as an elective. While I explore food science simply for the joy of understanding the science itself, psychology directly shapes my craft as a writer, giving me a deeper lens into human emotion, behaviour and the inner lives of the characters I create.",
+    "Here, you will find a collection of my poems, stories and works in progress. Stay as long as you like. Whether you are here to lose yourself in a long story, pause over a few lines of verse, or simply wander through my thoughts, I am glad you found your way here. Every piece on this site is a small window into how I see the world, and if any of these words stay with you, or remind you of something you have felt yourself, I would love to hear from you.",
+  ],
   author: "Vandana Basnet",
   authorFirst: "Vandana",
   description:
@@ -68,27 +74,27 @@ export type Category = {
 export const categories: Category[] = [
   {
     id: "micro-poetry", title: "Micro Poetry", singular: "Micro poem", verse: true,
-    desc: "Small poems, a few lines long: a breath, a glance, a thought caught mid-air.",
+    desc: "Distilled poetry: small verses that say a lot in a few lines.",
     book: { cover: "#9DAF95", ink: "#2B2D4A", gilt: "#4E6347", width: 50, height: 216 },
   },
   {
     id: "long-stanzas", title: "Long Stanzas", singular: "Poem", verse: true,
-    desc: "Longer poems that take their time, about the sky, the people I love and what the heart won't let go of.",
+    desc: "Extended verse that takes its time to explore a thought.",
     book: { cover: "#C99A9A", ink: "#2B2D4A", gilt: "#8A5A5E", width: 66, height: 252 },
   },
   {
     id: "short-stories", title: "Short Stories", singular: "Short story", verse: false,
-    desc: "Short fiction: small lives, quiet turning points and endings that linger.",
+    desc: "Brief encounters and small lives, told through short fiction.",
     book: { cover: "#3F5A47", ink: "#F3EAD8", gilt: "#C2A15E", width: 54, height: 236 },
   },
   {
     id: "longer-worlds", title: "Longer Worlds", singular: "Story", verse: false,
-    desc: "Longer fiction and imagined worlds, told across more pages.",
+    desc: "Long-form fiction: expansive stories and imagined worlds told across many chapters.",
     book: { cover: "#7B3640", ink: "#F3EAD8", gilt: "#C2A15E", width: 72, height: 264 },
   },
   {
     id: "after-hours", title: "After Hours", singular: "Late-night page", verse: false,
-    desc: "Pages written after the day is done: letters, notes and thoughts that only come at night.",
+    desc: "Late-night notes, fragments and short pieces, written whenever inspiration strikes.",
     book: { cover: "#C2A15E", ink: "#2B2D4A", gilt: "#6E5528", width: 50, height: 226 },
   },
   {

@@ -63,7 +63,7 @@ export default function ContactForm({ source = "contact" }: { source?: string })
 
   const sent = state === "sent";
   return (
-    <form onSubmit={onSubmit} noValidate className="relative flex min-w-0 flex-[1_1_380px] flex-col gap-[18px] rounded-2xl bg-bg p-6 sm:p-7" data-testid="contact-form">
+    <form onSubmit={onSubmit} noValidate className="relative flex min-w-0 flex-col gap-4 sm:gap-[18px]" data-testid="contact-form">
       {field("name", "Your name", <input id="cf-name" name="name" type="text" autoComplete="name" className="input" maxLength={100} {...aria("name")} />)}
       {field("email", "Email", <input id="cf-email" name="email" type="email" autoComplete="email" inputMode="email" className="input" maxLength={200} {...aria("email")} />)}
       {field("message", "Message", <textarea id="cf-message" name="message" rows={4} className="input" maxLength={5000} {...aria("message")} />)}
