@@ -243,7 +243,7 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
                     type="button"
                     onClick={async () => { await flush(); open(p); }}
                     aria-current={p.id === activeId ? "true" : undefined}
-                    className="flex min-h-[52px] w-full cursor-pointer flex-col items-start gap-1 rounded-xl border px-3 py-2 text-left"
+                    className="flex min-h-13 w-full cursor-pointer flex-col items-start gap-1 rounded-xl border px-3 py-2 text-left"
                     style={{ background: p.id === activeId ? "var(--surface)" : "transparent", borderColor: p.id === activeId ? "var(--line)" : "transparent", color: "var(--ink)" }}
                   >
                     <span className="flex w-full items-center gap-2">
@@ -251,7 +251,7 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
                       <span className="min-w-0 flex-1 truncate font-mono text-[15px]">{p.title || "Untitled"}</span>
                       {statusChip(p)}
                     </span>
-                    <span className="pl-[18px] text-[12px] text-muted">
+                    <span className="pl-4.5 text-[12px] text-muted">
                       {p.status === "draft" ? `edited ${formatDate(p.updatedAt, { day: "numeric", month: "short" })}` : formatDate(p.publishAt, { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })}
                     </span>
                   </button>
@@ -270,19 +270,19 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
       {/* Top bar */}
       {!focus && (
         <header className="sticky top-0 z-30 border-b border-line bg-bg/95 backdrop-blur">
-          <div className="mx-auto flex max-w-[1200px] items-center justify-between gap-3 px-4 py-2.5 sm:px-5">
+          <div className="mx-auto flex max-w-300 items-center justify-between gap-3 px-4 py-2.5 sm:px-5">
             <div className="flex min-w-0 items-center gap-2">
               {mobileView === "edit" && (
-                <button type="button" className="icon-btn min-[900px]:!hidden" aria-label="Back to your pages" onClick={async () => { await flush(); setMobileView("list"); }}>
+                <button type="button" className="icon-btn min-[900px]:hidden!" aria-label="Back to your pages" onClick={async () => { await flush(); setMobileView("list"); }}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M15 18 9 12l6-6" /></svg>
                 </button>
               )}
-              <Link href="/" className="flex min-h-[44px] items-center gap-2 font-mono text-[17px] font-bold no-underline" aria-label="View the site">
+              <Link href="/" className="flex min-h-11 items-center gap-2 font-mono text-[17px] font-bold no-underline" aria-label="View the site">
                 <Petal size={22} /> <span className="hidden sm:inline">Writing desk</span>
               </Link>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex min-h-[40px] items-center gap-1.5 rounded-full px-3 text-[14px]" style={{ background: streak.wroteToday ? "var(--tint-long-stanzas)" : "var(--card)" }} title={streak.wroteToday ? "You published today" : "Publish today to keep it going"} data-testid="streak">
+              <div className="flex min-h-10 items-center gap-1.5 rounded-full px-3 text-[14px]" style={{ background: streak.wroteToday ? "var(--tint-long-stanzas)" : "var(--card)" }} title={streak.wroteToday ? "You published today" : "Publish today to keep it going"} data-testid="streak">
                 <Petal size={16} center={streak.wroteToday ? "var(--gold)" : null} fill={streak.wroteToday ? "var(--petal2)" : "var(--muted)"} />
                 <span><strong>{streak.streak}</strong>-day streak</span>
               </div>
@@ -293,24 +293,24 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
             </div>
           </div>
           {storage === "memory" && (
-            <p className="m-0 bg-[var(--tint-after-hours)] px-4 py-1.5 text-center text-[13px]">Practice mode: no database connected, so pages reset when the server restarts.</p>
+            <p className="m-0 bg-(--tint-after-hours) px-4 py-1.5 text-center text-[13px]">Practice mode: no database connected, so pages reset when the server restarts.</p>
           )}
         </header>
       )}
 
-      <div className={`mx-auto grid w-full max-w-[1200px] flex-1 gap-8 px-4 py-5 sm:px-5 ${focus ? "" : "min-[900px]:grid-cols-[300px_1fr]"}`}>
-        {!focus && <aside className="min-[900px]:sticky min-[900px]:top-[80px] min-[900px]:max-h-[calc(100dvh-100px)]">{list}</aside>}
+      <div className={`mx-auto grid w-full max-w-300 flex-1 gap-8 px-4 py-5 sm:px-5 ${focus ? "" : "min-[900px]:grid-cols-[300px_1fr]"}`}>
+        {!focus && <aside className="min-[900px]:sticky min-[900px]:top-20 min-[900px]:max-h-[calc(100dvh-100px)]">{list}</aside>}
 
         <section aria-label="Editor" className={`min-w-0 ${mobileView === "list" && !focus ? "hidden min-[900px]:block" : "block"}`}>
           {!draft || !active ? (
             <div className="flex h-full min-h-[50vh] flex-col items-center justify-center gap-4 text-center" data-testid="desk-empty">
               <Petal size={44} />
               <p className="m-0 font-mono text-[22px]">A blank page is waiting</p>
-              <p className="m-0 max-w-[360px] text-body">Pick a page on the left, or start a new one. Everything saves as you type.</p>
+              <p className="m-0 max-w-90 text-body">Pick a page on the left, or start a new one. Everything saves as you type.</p>
               <button type="button" className="btn btn-primary" onClick={createNew}>Start writing</button>
             </div>
           ) : (
-            <div className="mx-auto flex max-w-[720px] flex-col gap-4 pb-40">
+            <div className="mx-auto flex max-w-180 flex-col gap-4 pb-40">
               <div role="radiogroup" aria-label="Shelf" className="flex gap-2 overflow-x-auto pb-1">
                 {categories.map((c) => (
                   <button
@@ -319,7 +319,7 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
                     role="radio"
                     aria-checked={draft.category === c.id}
                     onClick={() => change({ category: c.id })}
-                    className="inline-flex min-h-[40px] flex-none cursor-pointer items-center rounded-full border px-3.5 font-mono text-[14px]"
+                    className="inline-flex min-h-10 flex-none cursor-pointer items-center rounded-full border px-3.5 font-mono text-[14px]"
                     style={{ background: draft.category === c.id ? `var(--cat-${c.id})` : "transparent", color: draft.category === c.id ? "#2A2530" : "var(--ink)", borderColor: draft.category === c.id ? "transparent" : "var(--line)" }}
                   >
                     {c.title}
@@ -356,7 +356,7 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
       {draft && active && (
         <div className={`fixed inset-x-0 bottom-0 z-30 border-t border-line bg-bg/95 backdrop-blur ${mobileView === "list" && !focus ? "hidden min-[900px]:block" : ""}`} style={{ paddingBottom: "env(safe-area-inset-bottom)" }}>
           {scheduleOpen && (
-            <div className="mx-auto flex max-w-[1200px] flex-wrap items-end gap-3 px-4 pt-3 sm:px-5">
+            <div className="mx-auto flex max-w-300 flex-wrap items-end gap-3 px-4 pt-3 sm:px-5">
               <div className="field">
                 <label htmlFor="desk-when">Publish on</label>
                 <input id="desk-when" type="datetime-local" className="input" value={when} min={toLocalInput(new Date())} onChange={(e) => setWhen(e.target.value)} />
@@ -365,7 +365,7 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
               <button type="button" className="btn btn-ghost" onClick={() => setScheduleOpen(false)}>Cancel</button>
             </div>
           )}
-          <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5 sm:px-5">
+          <div className="mx-auto flex max-w-300 flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5 sm:px-5">
             <p className="m-0 flex items-center gap-2 text-[14px] text-muted" aria-live="polite" data-testid="save-state">
               <span className="h-2 w-2 rounded-full" style={{ background: save === "saved" ? "var(--ok)" : save === "error" || save === "offline" ? "var(--danger)" : "var(--gold)" }} aria-hidden="true" />
               {saveLabel} · {words} {words === 1 ? "word" : "words"}
@@ -384,16 +384,16 @@ export default function Desk({ initialPosts, initialStreak, user, storage }: { i
               </button>
               {active.status !== "draft" && (
                 <>
-                  {active.status === "published" && <Link href={`/journal/${active.slug}`} target="_blank" className="btn btn-ghost !min-h-[44px] !px-4 text-[15px]">View</Link>}
-                  <button type="button" className="btn btn-ghost !min-h-[44px] !px-4 text-[15px]" disabled={busy} onClick={() => setStatus("draft")}>Unpublish</button>
+                  {active.status === "published" && <Link href={`/journal/${active.slug}`} target="_blank" className="btn btn-ghost min-h-11! px-4! text-[15px]">View</Link>}
+                  <button type="button" className="btn btn-ghost min-h-11! px-4! text-[15px]" disabled={busy} onClick={() => setStatus("draft")}>Unpublish</button>
                 </>
               )}
               {active.status === "draft" && (
-                <button type="button" className="btn btn-ghost !min-h-[44px] !px-4 text-[15px]" disabled={busy} onClick={() => { setWhen(toLocalInput(new Date(Date.now() + 86400000))); setScheduleOpen((o) => !o); }} aria-expanded={scheduleOpen}>
+                <button type="button" className="btn btn-ghost min-h-11! px-4! text-[15px]" disabled={busy} onClick={() => { setWhen(toLocalInput(new Date(Date.now() + 86400000))); setScheduleOpen((o) => !o); }} aria-expanded={scheduleOpen}>
                   Schedule
                 </button>
               )}
-              <button type="button" className="btn btn-primary !min-h-[44px] !px-5 text-[15px]" disabled={busy} onClick={() => setStatus("published")} data-testid="publish">
+              <button type="button" className="btn btn-primary min-h-11! px-5! text-[15px]" disabled={busy} onClick={() => setStatus("published")} data-testid="publish">
                 {active.status === "published" ? "Update" : "Publish"}
               </button>
             </div>

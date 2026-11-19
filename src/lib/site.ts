@@ -7,11 +7,9 @@ export const DOMAIN = "thecommonplacebook.in";
 export const site = {
   name: "The Commonplace Book",
   tagline: "Writing is how we teach a fleeting moment to stay.",
-  /** Her own words, used on the homepage (first paragraph, then "Show more") and on /about. */
+  /** Her own words, shown at the top of /about. */
   bio: [
     "I write poetry and fiction with a simple goal: to capture life as it is, and to imagine it as it could be. I believe in the power of language to turn ordinary observations into something memorable and resonant.",
-    "I am currently a second-year student of Food Science, with Psychology as an elective. While I explore food science simply for the joy of understanding the science itself, psychology directly shapes my craft as a writer, giving me a deeper lens into human emotion, behaviour and the inner lives of the characters I create.",
-    "Here, you will find a collection of my poems, stories and works in progress. Stay as long as you like. Whether you are here to lose yourself in a long story, pause over a few lines of verse, or simply wander through my thoughts, I am glad you found your way here. Every piece on this site is a small window into how I see the world, and if any of these words stay with you, or remind you of something you have felt yourself, I would love to hear from you.",
   ],
   author: "Vandana Basnet",
   authorFirst: "Vandana",
@@ -52,10 +50,15 @@ export const book = {
   blurb:
     "My first collection, born out of everything I have lived, felt, and could not say aloud. Poems that hold on to moments, people, places and emotions, so they can live a little longer.",
   backPoem: [
-    "I hold my silence like a fragile glass,",
-    "hoping one day I'll be brave enough",
-    "to let it shatter",
-    "in the sound of her name",
+    "I saw a flower,",
+    "So lovely, so bright.",
+    "When I looked closer,",
+    "I saw thorns in the light.",
+
+    "But I didn't turn away",
+    "It was still beautiful",
+    "Flaws and all",
+    "Just like life.",
   ],
 };
 
@@ -74,7 +77,7 @@ export type Category = {
 export const categories: Category[] = [
   {
     id: "micro-poetry", title: "Micro Poetry", singular: "Micro poem", verse: true,
-    desc: "Distilled poetry: small verses that say a lot in a few lines.",
+    desc: "Distilled poetry—small verses that say a lot in a few lines.",
     book: { cover: "#9DAF95", ink: "#2B2D4A", gilt: "#4E6347", width: 50, height: 216 },
   },
   {
@@ -89,12 +92,12 @@ export const categories: Category[] = [
   },
   {
     id: "longer-worlds", title: "Longer Worlds", singular: "Story", verse: false,
-    desc: "Long-form fiction: expansive stories and imagined worlds told across many chapters.",
+    desc: "Long-form fiction—expansive stories and imagined worlds told across many chapters.",
     book: { cover: "#7B3640", ink: "#F3EAD8", gilt: "#C2A15E", width: 72, height: 264 },
   },
   {
     id: "after-hours", title: "After Hours", singular: "Late-night page", verse: false,
-    desc: "Late-night notes, fragments and short pieces, written whenever inspiration strikes.",
+    desc: "Late-night notes, fragments, and short pieces written whenever inspiration strikes.",
     book: { cover: "#C2A15E", ink: "#2B2D4A", gilt: "#6E5528", width: 50, height: 226 },
   },
   {

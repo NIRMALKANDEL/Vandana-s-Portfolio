@@ -295,6 +295,7 @@ function Reader({ cat, pick, count, from, onClosed }: { cat: Category; pick: She
           <div className="rdx-page">
             <div className={`rdx-content ${ready ? "on" : ""}`}>
               <p className="rdx-meta rdx-phone-only">{cat.title} · {meta}</p>
+              <p className="rdx-desc rdx-phone-only rdx-desc-phone">{cat.desc}</p>
               <h2 id="rdx-title" className="rdx-title">{pick ? pick.title : `${cat.title} is waiting for its first page`}</h2>
               {pick ? (
                 <p className={`rdx-sample ${cat.verse ? "is-verse" : ""}`}>{pick.sample}</p>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: { type: "profile", title: `About ${site.author}`, url: "/about", images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: site.name }] },
 };
 
-/** Three index cards pinned to the page, each with a strip of washi tape. */
+/** Two index cards hanging from a rope, each with a strip of washi tape. */
 const CARDS = [
   {
     title: "The writing",
@@ -22,21 +22,10 @@ const CARDS = [
     tape: "var(--hp-rose)",
     body: (
       <>
-        Micro poetry and long stanzas, short stories and longer worlds, pages written after hours and the odd article. I keep them all here, the way a commonplace book keeps the lines its owner couldn&apos;t bear to lose.
+        Here, you will find a collection of my poems, stories and works in progress. Stay as long as you like. Whether you are here to lose yourself in a long story, pause over a few lines of verse, or simply wander through my thoughts, I am glad you found your way here. Every piece on this site is a small window into how I see the world, and if any of these words stay with you, or remind you of something you have felt yourself, I would love to hear from you.
       </>
     ),
     link: { href: "/shelf", label: "Browse the shelf" },
-  },
-  {
-    title: "The book",
-    tilt: 1.2,
-    tape: "var(--hp-lilac)",
-    body: (
-      <>
-        <em>{book.title}</em> is my first collection, published by {book.publisher} in {book.published}. It was born out of everything I have lived, felt and could not say aloud.
-      </>
-    ),
-    link: { href: "/book", label: "Open the book" },
   },
   {
     title: "Away from the page",
@@ -44,7 +33,7 @@ const CARDS = [
     tape: "var(--hp-peach)",
     body: (
       <>
-        I&apos;m in the second year of a B.Sc. in Food Science in Raipur, Chhattisgarh, with Psychology as an elective. Studying how people think and feel finds its way into the writing more often than you&apos;d expect.
+        I am currently a second-year student of Food Science, with Psychology as an elective. While I explore food science simply for the joy of understanding the science itself, psychology directly shapes my craft as a writer, giving me a deeper lens into human emotion, behaviour and the inner lives of the characters I create.
       </>
     ),
     link: null,
@@ -73,7 +62,7 @@ export default function AboutPage() {
             height={350}
             sizes="(max-width: 639px) 240px, 280px"
             priority
-            className="relative h-[300px] w-[240px] object-cover sm:h-[350px] sm:w-[280px]"
+            className="relative h-75 w-60 object-cover sm:h-87.5 sm:w-70"
             style={{ borderRadius: "999px 999px 18px 18px", border: "6px solid var(--paper)", boxShadow: "0 22px 44px -26px rgba(43,45,74,.55)" }}
           />
           <LavenderSprig width={90} height={120} className="absolute -bottom-3 right-2 sm:right-4" style={{ transformOrigin: "20px 120px" }} />
@@ -86,7 +75,7 @@ export default function AboutPage() {
             Hi, I&apos;m <span className="about-name">{site.authorFirst}</span>
           </h1>
           {site.bio.map((p) => (
-            <p key={p.slice(0, 24)} className="m-0 max-w-[600px] text-[17px] text-body sm:text-[18px]">{p}</p>
+            <p key={p.slice(0, 24)} className="m-0 max-w-150 text-[17px] text-body sm:text-[18px]">{p}</p>
           ))}
           <div className="mt-1"><ProfileLinks long /></div>
         </div>
@@ -95,7 +84,7 @@ export default function AboutPage() {
       {/* A few lines of hers, set like a page torn from the book */}
       <section className="about-quote" aria-label={`Lines from ${book.title}`}>
         <div className="container-cpb">
-          <figure className="m-0 mx-auto max-w-[680px] text-center">
+          <figure className="m-0 mx-auto max-w-170 text-center">
             <span className="about-quote-mark" aria-hidden="true">&ldquo;</span>
             <blockquote className="m-0">
               {book.backPoem.map((l) => (
@@ -110,13 +99,13 @@ export default function AboutPage() {
       {/* Index cards */}
       <section className="container-cpb py-12 sm:py-24" aria-labelledby="about-more">
         <p className="eyebrow mb-2">a little more</p>
-        <h2 id="about-more" className="h-section mb-6 sm:mb-14">Three things to know</h2>
+        <h2 id="about-more" className="h-section mb-6 sm:mb-14">Two things to know</h2>
         <div className="about-line">
           <div className="about-line-track">
             {/* The rope the three cards hang from: it dips at the middle of each card, under its tape */}
             <svg className="about-rope" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <path className="about-rope-core" d="M0 6 Q 25 34 50 34 T 100 6 Q 125 34 150 34 T 200 6 Q 225 34 250 34 T 300 6" />
-              <path className="about-rope-twist" d="M0 6 Q 25 34 50 34 T 100 6 Q 125 34 150 34 T 200 6 Q 225 34 250 34 T 300 6" />
+              <path className="about-rope-core" d="M0 6 Q 37.5 34 75 34 T 150 6 Q 187.5 34 225 34 T 300 6" />
+              <path className="about-rope-twist" d="M0 6 Q 37.5 34 75 34 T 150 6 Q 187.5 34 225 34 T 300 6" />
             </svg>
             {CARDS.map((c) => (
               <article key={c.title} className="about-card" style={{ "--tilt": `${c.tilt}deg`, "--tape": c.tape } as CSSProperties}>

@@ -154,7 +154,7 @@ test.describe("homepage interactions", () => {
     await book.click();
     await expect(book).toHaveAttribute("aria-pressed", "true");
     await expect(book).toHaveClass(/isopen/);
-    await expect(book).toContainText("I hold my silence like a fragile glass");
+    await expect(book).toContainText("I saw a flower");
   });
 
   test("postcards link to posts and the real poem is listed", async ({ page }) => {

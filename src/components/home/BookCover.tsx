@@ -25,7 +25,7 @@ export default function BookCover({ priority = false }: { priority?: boolean }) 
           data-testid="book-cover"
         >
           <span className="bbook">
-            <span className="bpage">
+            <span className={`bpage ${book.backPoem.length > 5 ? "is-long" : ""}`}>
               {book.backPoem.map((l) => (
                 <span key={l}>{l}</span>
               ))}
