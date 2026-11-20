@@ -50,13 +50,17 @@ export default function BookPage() {
 
       <section className="container-cpb grid gap-14 py-20 [grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))]">
         <div className="flex flex-col gap-5">
-          <h2 className="h-section">From the back cover</h2>
-          <blockquote className="m-0 border-l-2 pl-5 font-mono text-[19px] italic leading-[1.8]" style={{ borderColor: "var(--petal2)" }}>
-            {book.backPoem.map((l) => <span key={l} className="block">{l}</span>)}
+          <h2 className="h-section">From the pages</h2>
+          <blockquote className="m-0 flex flex-col gap-5 border-l-2 pl-5 font-mono text-[19px] italic leading-[1.8]" style={{ borderColor: "var(--petal2)" }}>
+            {book.pagePoem.map((stanza) => (
+              <p key={stanza[0]} className="m-0">
+                {stanza.map((l) => <span key={l} className="block">{l}</span>)}
+              </p>
+            ))}
           </blockquote>
           <h3 className="mt-6 mb-0 font-mono text-[22px] font-normal">About the author</h3>
           <p className="m-0 text-body">
-            {site.author} writes to capture and preserve moments, people, places and emotions in the language of poetry. For her, words are a way of holding on to what the heart cannot let go of, turning memories into verses that live forever. <em>{book.title}</em> is her first collection, born out of everything she has lived, felt and could not say aloud.
+            {site.author} is a poet drawn to the quiet magic of everyday emotions. She writes to hold onto fleeting moments, familiar places, and the people who shape us—turning the heart’s unspoken truths into lasting verse. <em>{book.title}</em> is her first book.
           </p>
           <dl className="m-0 mt-4 grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2 text-[16px]">
             {facts.map(([k, v]) => (

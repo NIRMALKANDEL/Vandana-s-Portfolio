@@ -48,7 +48,18 @@ export const book = {
   backCover: { src: "/images/back-cover.jpg", alt: "Back cover of Things I Told the Sky, with a poem and the author's bio" },
   certificate: { src: "/images/publication-certificate.jpg", alt: "Certificate of publication from BookLeaf Publishing" },
   blurb:
-    "My first collection, born out of everything I have lived, felt, and could not say aloud. Poems that hold on to moments, people, places and emotions, so they can live a little longer.",
+    "Things I Told the Sky is a quiet sanctuary for the words we swallow and the feelings we carry in secret. Written in the stillness of lingering memories, this debut collection explores unspoken love, fleeting encounters, and the courage it takes to let go—inviting you to find pieces of your own story between the lines.",
+  // Shown on the right-hand page when the book opens on the homepage. One array per stanza.
+  coverPoem: [
+    ["I love how you see yourself in the glass,", "A fleeting moment, forever it lasts."],
+    ["The majestic smile you don't often show,", "I see you in ways only I know."],
+  ],
+  // "From the pages" on /book. One array per stanza.
+  pagePoem: [
+    ["I wore a mask", "To get through the day.", "It kept me safe", "And fear away."],
+    ["But it grew tight", "When I wore it too long,", "So I took it off", "And felt more strong."],
+  ],
+  // The poem printed on the real back cover (still quoted on /about and beside journal posts).
   backPoem: [
     "I saw a flower,",
     "So lovely, so bright.",

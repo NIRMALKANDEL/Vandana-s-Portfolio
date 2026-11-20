@@ -147,14 +147,14 @@ test.describe("homepage interactions", () => {
     await expect(page).toHaveURL(/\/shelf\/(micro-poetry|long-stanzas|short-stories|longer-worlds|after-hours|articles)$/);
   });
 
-  test("book cover opens on tap to show the back-cover poem", async ({ page }) => {
+  test("book cover opens on tap to show the poem inside", async ({ page }) => {
     const book = page.getByTestId("book-cover");
     await book.scrollIntoViewIfNeeded();
     await expect(book).toHaveAttribute("aria-pressed", "false");
     await book.click();
     await expect(book).toHaveAttribute("aria-pressed", "true");
     await expect(book).toHaveClass(/isopen/);
-    await expect(book).toContainText("I saw a flower");
+    await expect(book).toContainText("I love how you see yourself in the glass");
   });
 
   test("postcards link to posts and the real poem is listed", async ({ page }) => {
