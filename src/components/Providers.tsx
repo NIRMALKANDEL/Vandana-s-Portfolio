@@ -26,6 +26,8 @@ function SmoothScroll() {
 }
 
 export default function Providers({ children }: { children: ReactNode }) {
+  // The writing desk is private and runs no analytics, so it doesn't need the cookie banner.
+  const onDesk = usePathname().startsWith("/desk");
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange storageKey="cpb-theme">
       <MotionConfig reducedMotion="user">
@@ -37,7 +39,7 @@ export default function Providers({ children }: { children: ReactNode }) {
             style: { background: "var(--btn)", color: "var(--btn-text)", border: "none", borderRadius: 999, fontFamily: "var(--font-dm)", fontSize: 15 },
           }}
         />
-        <CookieConsent />
+        {!onDesk && <CookieConsent />}
         <Analytics />
       </MotionConfig>
     </ThemeProvider>

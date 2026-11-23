@@ -561,3 +561,90 @@ textarea.input { padding: 12px 14px; resize: vertical; min-height: 140px; }
   .about-rope { left: 10px; width: calc(100% - 20px); }
   .about-line-track > .about-card { flex: 0 0 min(76vw, 300px); scroll-snap-align: start; }
 }
+
+/* ---------- Writing desk ---------- */
+.desk-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; min-height: 52px;
+  padding: 8px 12px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: var(--ink);
+  text-align: left; cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease;
+}
+.desk-item:hover { background: var(--halo); }
+.desk-item[aria-current="true"] { background: var(--surface); border-color: var(--line); }
+.desk-item:focus-visible, .desk-chip:focus-visible, .desk-action:focus-visible, .desk-seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.desk-status {
+  margin: 0; padding: 8px 14px; border-radius: 12px; font-size: 14px; line-height: 1.5; color: var(--ink);
+  background: var(--card);
+}
+.desk-status[data-status="published"] { background: var(--tint-micro-poetry); }
+.desk-status[data-status="scheduled"] { background: var(--tint-longer-worlds); }
+
+.desk-tools {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px;
+  padding: 4px 0;
+}
+.desk-seg { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--card); }
+.desk-seg button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 14px; border: 0; border-radius: 999px;
+  background: transparent; color: var(--muted); font: inherit; font-size: 14px; cursor: pointer;
+}
+.desk-seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgb(43 45 74 / .12); }
+
+.desk-chip {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 40px; min-height: 40px; padding: 0 12px;
+  border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink);
+  font: inherit; font-size: 14px; cursor: pointer; transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+.desk-chip:hover { color: var(--accent); border-color: var(--lav); }
+.desk-chip[disabled] { opacity: .6; cursor: progress; }
+.desk-chip.is-danger { color: var(--danger); }
+.desk-chip.is-danger:hover { background: color-mix(in srgb, var(--danger) 10%, var(--surface)); border-color: var(--danger); color: var(--danger); }
+
+.desk-action {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 12px; border-radius: 999px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; cursor: pointer;
+}
+.desk-action:hover { color: var(--accent); }
+.desk-action[aria-pressed="true"] { background: var(--hl); }
+.desk-action.is-danger:hover { color: var(--danger); border-color: var(--danger); }
+@media (max-width: 559px) {
+  .desk-action { width: 44px; padding: 0; justify-content: center; }
+  .desk-action span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+.desk-editor { position: relative; display: flex; flex-direction: column; gap: 4px; border-radius: 16px; }
+.desk-editor.is-dragging { outline: 2px dashed var(--lav); outline-offset: 8px; }
+.desk-drop {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: 16px;
+  background: color-mix(in srgb, var(--hl) 85%, transparent); font-family: var(--font-mono); font-size: 18px; color: var(--ink); pointer-events: none;
+}
+
+.desk-figure {
+  margin: 14px 0; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--paper);
+  box-shadow: 0 1px 2px rgb(43 45 74 / .06);
+}
+.desk-figure img { display: block; width: 100%; max-height: 460px; object-fit: contain; background: var(--halo); }
+.desk-figure-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 8px 10px; border-top: 1px solid var(--line); }
+.desk-figure-alt {
+  flex: 1 1 220px; min-height: 40px; padding: 0 12px; border: 1px solid transparent; border-radius: 10px;
+  background: transparent; color: var(--ink); font: inherit; font-size: 14px;
+}
+.desk-figure-alt::placeholder { color: var(--muted); }
+.desk-figure-alt:hover { border-color: var(--line); }
+.desk-figure-alt:focus-visible { outline: none; border-color: var(--accent); background: var(--input); }
+
+.desk-preview { padding: 8px 0 24px; }
+
+.desk-dialog { padding: 0; border: 0; background: transparent; max-width: min(460px, calc(100vw - 32px)); color: var(--ink); }
+.desk-dialog::backdrop { background: var(--reader-veil); backdrop-filter: blur(2px); }
+.desk-dialog[open] { animation: rise 220ms ease-out both; }
+.desk-dialog-card {
+  display: flex; flex-direction: column; gap: 14px; padding: 24px; border-radius: 20px;
+  background: var(--paper); border: 1px solid var(--line); box-shadow: 0 20px 50px rgb(43 45 74 / .25);
+}
+
+.desk-link { color: var(--muted); font-size: 14px; }
+.desk-link:hover { color: var(--accent); }
+
+/* The writing surface is the page itself: no focus box around the words (the caret shows where you are). */
+.desk-editor textarea:focus-visible, #desk-title:focus-visible { outline: none; }

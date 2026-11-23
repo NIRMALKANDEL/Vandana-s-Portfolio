@@ -88,3 +88,79 @@ test("publishing without a title is blocked with a toast", async ({ page }) => {
   await expect(page.getByText("Give it a title first.")).toBeVisible();
   await expect(page.getByTestId("desk-title")).toBeFocused();
 });
+
+test("pictures: add one, see it as a card, remove it with one tap, undo, then remove for good", async ({ page }) => {
+  test.setTimeout(120_000);
+  await presetConsent(page);
+  // Cloudinary is mocked: the signature endpoint and the upload itself.
+  const url = "https://res.cloudinary.com/demo/image/upload/v1/commonplace/test-sky.png";
+  const deletes: string[] = [];
+  await page.route("**/api/desk/upload", async (route) => {
+    if (route.request().method() === "DELETE") { deletes.push(route.request().postData() || ""); return route.fulfill({ json: { ok: true } }); }
+    return route.fulfill({ json: { signature: "x", timestamp: 1, apiKey: "k", cloudName: "demo", folder: "commonplace", allowed_formats: "png" } });
+  });
+  await page.route("https://api.cloudinary.com/**", (route) => route.fulfill({ json: { secure_url: url } }));
+  await page.route("https://res.cloudinary.com/**", (route) => route.fulfill({ contentType: "image/png", body: Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==", "base64") }));
+
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/desk");
+  await page.getByTestId("new-page").click();
+  await page.getByTestId("desk-title").fill("With a picture");
+  await page.getByTestId("desk-body").fill("Above the picture");
+
+  await page.locator('input[type="file"]').setInputFiles({ name: "sky.png", mimeType: "image/png", buffer: Buffer.from("png") });
+  const card = page.locator(".desk-figure");
+  await expect(card).toHaveCount(1);
+  await expect(card.locator("img")).toHaveAttribute("src", /commonplace\/test-sky/);
+  // No raw markdown anywhere in the writing boxes.
+  for (const v of await page.locator(".desk-editor textarea").evaluateAll((ts) => ts.map((t) => (t as HTMLTextAreaElement).value))) expect(v).not.toContain("![");
+
+  await card.getByPlaceholder(/Describe this picture/).fill("an evening sky");
+  await page.getByTestId("preview").click();
+  await expect(page.locator(".desk-preview img")).toHaveAttribute("alt", "an evening sky");
+  await page.getByRole("button", { name: "Write" }).click();
+
+  // Remove → Undo brings it back in the same place.
+  await page.getByTestId("remove-image").click();
+  await expect(card).toHaveCount(0);
+  await page.getByRole("button", { name: "Undo" }).click();
+  await expect(card).toHaveCount(1);
+  await expect(page.getByTestId("desk-body")).toHaveValue("Above the picture");
+
+  // Remove for good → once the undo window closes the file is cleaned up.
+  await page.getByTestId("remove-image").click();
+  await expect(card).toHaveCount(0);
+  await expect(page.getByTestId("save-state")).toContainText("Saved", { timeout: 10_000 });
+  await expect.poll(() => deletes.length, { timeout: 15_000 }).toBe(1);
+  expect(deletes[0]).toContain("test-sky");
+});
+
+test("deleting a page asks in the site's own dialog, and 'Keep it' keeps it", async ({ page }) => {
+  await presetConsent(page);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/desk");
+  await page.getByTestId("new-page").click();
+  await page.getByTestId("desk-title").fill("Delete me maybe");
+  await expect(page.getByTestId("save-state")).toContainText("Saved", { timeout: 10_000 });
+
+  let nativeDialog = false;
+  page.on("dialog", (d) => { nativeDialog = true; d.dismiss(); });
+  await page.getByTestId("delete-page").click();
+  await expect(page.getByRole("dialog", { name: "Delete this page?" })).toBeVisible();
+  await page.getByRole("button", { name: "Keep it" }).click();
+  await expect(page.getByRole("dialog")).toBeHidden();
+  await expect(page.getByTestId("desk-title")).toHaveValue("Delete me maybe");
+
+  await page.getByTestId("delete-page").click();
+  await page.getByTestId("confirm-delete").click();
+  await expect(page.getByText("Page deleted.")).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Your pages" })).not.toContainText("Delete me maybe");
+  expect(nativeDialog).toBe(false);
+});
+
+test("easy ways in: /write and /admin lead to the desk", async ({ page }) => {
+  await page.goto("/write");
+  await expect(page).toHaveURL(/\/desk$/);
+  await page.goto("/admin");
+  await expect(page).toHaveURL(/\/desk$/);
+});

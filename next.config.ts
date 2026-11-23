@@ -49,7 +49,14 @@ const nextConfig: NextConfig = {
     const moved: Record<string, string> = {
       poetry: "long-stanzas", microfiction: "micro-poetry", letters: "after-hours", essays: "articles", "book-notes": "after-hours",
     };
-    return Object.entries(moved).map(([from, to]) => ({ source: `/shelf/${from}`, destination: `/shelf/${to}`, permanent: true }));
+    // Easy ways into the writing desk: /write, /admin, /login, /dashboard and desk.thecommonplacebook.in.
+    const toDesk = ["/write", "/admin", "/login", "/dashboard"].map((source) => ({ source, destination: "/desk", permanent: false }));
+    const deskHost = { source: "/:path*", has: [{ type: "host" as const, value: "desk.thecommonplacebook.in" }], destination: "https://thecommonplacebook.in/desk", permanent: false };
+    return [
+      ...Object.entries(moved).map(([from, to]) => ({ source: `/shelf/${from}`, destination: `/shelf/${to}`, permanent: true })),
+      ...toDesk,
+      deskHost,
+    ];
   },
   async headers() {
     return [
