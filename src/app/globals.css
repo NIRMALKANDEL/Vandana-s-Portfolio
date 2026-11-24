@@ -29,26 +29,27 @@
 }
 
 .dark {
-  --bg: #2c2845; --surface: #383354; --ink: #f6f1fb; --muted: #bdb5d4; --body: #e0daec;
-  --accent: #d4c6f2; --petal: #d99baa; --petal2: #c27f90; --sage: #92ad94; --sage2: #7e9c80;
-  --stem: #7e9b7a; --lilac: #9e8fc9; --lav: #a893d8; --sky: #7f95c2; --butter: #cdb98a;
-  --peach: #d6a58c; --gold: #d1ae5e; --halo: #34304f; --hl: #4b4170; --cursor: #c9b8ee;
-  --strip: #34304f; --strip-text: #ddd3f5; --bookband: #312d4b; --jband: #332d48;
-  --plank: #57507a; --plank2: #46406a; --line: #4a4466; --card: #443e63; --btn: #f1ecf8;
-  --btn-text: #2c2845; --input: #2a2643; --input-line: #8a86ad; --paper: #3a3557;
-  --mark: #a39fc0; --crimson: #f09a84; --coral: #f09a84; --tag-lt: #d2c6ee;
-  --danger: #f0a0b0; --ok: #a9d3b2;
-  --hp-rose: #d99baa; --hp-rose2: #c27f90; --hp-lilac: #9e8fc9; --hp-peach: #d6a58c; --hp-lav: #a893d8;
-  --shelf-wall: #322d4d; --shelf-wall2: #2a2643; --wood: #6b5d84; --wood2: #4b4166; --reader-veil: rgba(44,40,69,.92);
+  /* Plum dusk — the light theme's paper and lilac, at night */
+  --bg: #221b26; --surface: #2d2433; --ink: #f6ece8; --muted: #ab9cae; --body: #e2d6d8;
+  --accent: #d6bcea; --petal: #e3a1b2; --petal2: #c9849a; --sage: #a8c4a4; --sage2: #8fae8b;
+  --stem: #8fae8b; --lilac: #a98fc8; --lav: #b79ad9; --sky: #93a6cf; --butter: #d8bf86;
+  --peach: #dfa98f; --gold: #e6bd6a; --halo: #2a2230; --hl: #4a3558; --cursor: #d6bcea;
+  --strip: #2a2230; --strip-text: #e6d2f2; --bookband: #282030; --jband: #2c2229;
+  --plank: #5a4762; --plank2: #463850; --line: #41354a; --card: #382d40; --btn: #f6ece8;
+  --btn-text: #221b26; --input: #1d1720; --input-line: #8e7f98; --paper: #2a2130;
+  --mark: #a898ab; --crimson: #f2a08c; --coral: #f2a08c; --tag-lt: #e0cdee;
+  --danger: #f2a6b6; --ok: #a8d0ad;
+  --hp-rose: #e3a1b2; --hp-rose2: #c9849a; --hp-lilac: #a98fc8; --hp-peach: #dfa98f; --hp-lav: #b79ad9;
+  --shelf-wall: #2a2130; --shelf-wall2: #1d1720; --wood: #6c5670; --wood2: #4c3b51; --reader-veil: rgba(34,27,38,.93);
   /* Night sky */
-  --sky-a: #3b3363; --sky-b: #312c50;
+  --sky-a: #33263f; --sky-b: #271f2e;
 
-  --cat-micro-poetry: #92ad94; --tint-micro-poetry: #2f4043;
-  --cat-long-stanzas: #d99baa; --tint-long-stanzas: #43314a;
-  --cat-short-stories: #8fa5cf; --tint-short-stories: #2f3a55;
-  --cat-longer-worlds: #a99ad3; --tint-longer-worlds: #3a3360;
-  --cat-after-hours: #cdb98a; --tint-after-hours: #403a36;
-  --cat-articles: #b3a596; --tint-articles: #3b3843;
+  --cat-micro-poetry: #a8c4a4; --tint-micro-poetry: #2b3530;
+  --cat-long-stanzas: #e3a1b2; --tint-long-stanzas: #3f2a37;
+  --cat-short-stories: #93a6cf; --tint-short-stories: #2a2d40;
+  --cat-longer-worlds: #b79ad9; --tint-longer-worlds: #36294a;
+  --cat-after-hours: #d8bf86; --tint-after-hours: #3a3029;
+  --cat-articles: #bba7a0; --tint-articles: #352c33;
 
   color-scheme: dark;
 }
