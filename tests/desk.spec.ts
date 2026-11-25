@@ -158,9 +158,11 @@ test("deleting a page asks in the site's own dialog, and 'Keep it' keeps it", as
   expect(nativeDialog).toBe(false);
 });
 
-test("easy ways in: /write and /admin lead to the desk", async ({ page }) => {
+test("only /write leads to the desk; no public login-style paths", async ({ page }) => {
   await page.goto("/write");
   await expect(page).toHaveURL(/\/desk$/);
-  await page.goto("/admin");
-  await expect(page).toHaveURL(/\/desk$/);
+  const res = await page.goto("/admin");
+  expect(res?.status()).toBe(404);
+  await page.goto("/");
+  await expect(page.getByTestId("footer-desk")).toHaveCount(0);
 });

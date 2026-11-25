@@ -57,10 +57,6 @@ export default function Footer() {
 
       <div className="container-cpb site-footer-base">
         <p className="m-0">© {new Date().getFullYear()} {site.author}</p>
-        <Link href="/desk" prefetch={false} rel="nofollow" className="nl desk-link inline-flex min-h-[44px] items-center gap-1.5" data-testid="footer-desk">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" /></svg>
-          Writing desk
-        </Link>
         <button type="button" onClick={openConsentPreferences} className="nl inline-flex min-h-[44px] cursor-pointer items-center border-0 bg-transparent p-0 text-[14px] text-muted">
           Cookie preferences
         </button>
